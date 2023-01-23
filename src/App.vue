@@ -45,7 +45,7 @@ main {
 
 main.dark-mode {
   --bg-primary: #2b2d42;
-  --text-primary: #ddd;
+  --text-primary: rgb(153, 153, 153);
 }
 
 .content {
