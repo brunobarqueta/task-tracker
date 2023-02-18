@@ -4,9 +4,7 @@
       <SideBar @whenToggleMode="toggleMode" />
     </div>
     <div class="column is-three-quarter content">
-      <router-view>
-
-      </router-view>
+      <router-view></router-view>
     </div>
   </main>
 </template>
