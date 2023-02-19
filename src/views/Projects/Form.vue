@@ -20,6 +20,8 @@
 import { defineComponent } from 'vue';
 import { useStore } from '@/store';
 import { ADD_PROJECT, EDIT_PROJECT } from '@/store/mutation-types';
+import { NotificationType } from '@/interfaces/INotification';
+import useNotificator from '@/hooks/notificator'
 
 export default defineComponent({
     name: 'Form',
@@ -28,7 +30,7 @@ export default defineComponent({
             type: String
         }
     },
-    mounted () {
+    mounted() {
         if (this.id) {
             const project = this.store.state.projects.find(project => project.id == this.id);
             this.projectName = project?.name || '';
@@ -50,14 +52,17 @@ export default defineComponent({
             } else {
                 this.store.commit(ADD_PROJECT, this.projectName);
                 this.projectName = '';
+                this.notificate(NotificationType.success, 'New project added', 'Your project is already available.')
                 this.$router.push('/projects');
             }
-        }
+        },
     },
-    setup () {
+    setup() {
         const store = useStore();
+        const { notificate } = useNotificator();
         return {
-            store
+            store,
+            notificate
         }
     }
 })
